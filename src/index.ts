@@ -202,7 +202,7 @@ server.registerTool(
   {
     title: "Recheck an Influencer Watchlist for Changes",
     description:
-      "Rereads a named watchlist of creator handles and compares every field against the state the previous run on that same list name recorded. Returns one row per change with change_type, change_from, change_to, and previous_run_at, alongside the creator handle, profile URL, follower count, newsletter status, bio link, and manager email. The first run on a new list name records the baseline and returns it, so there is something to compare against next time. Each list name keeps its own baseline, so one account can watch a client roster, a prospect list, and a competitor set without them mixing. Turning off the link recheck keeps the pass to profiles only, which is faster and cheaper on a large list. Charges $0.002 per run plus $0.008 per creator rechecked, $0.01 per change found, and $0.01 per Instagram bio fetch when one is needed. Requires an APIFY_TOKEN and consumes Apify credits. Read only.",
+      "Rereads a named watchlist of creator handles and compares every field against the state the previous run on that same list name recorded. Returns one row per change with change_type, change_from, change_to, and previous_run_at, alongside the creator handle, profile URL, follower count, newsletter status, bio link, and manager email. The first run on a new list name records the baseline and returns it, so there is something to compare against next time. Each list name keeps its own baseline, so one account can watch a client roster, a prospect list, and a competitor set without them mixing. Turning off the link recheck keeps the pass to profiles only, which is faster and cheaper on a large list. Charges $0.002 per run plus $0.008 per creator rechecked, $0.01 per change found, and $0.01 per Instagram bio fetch when one is needed. Contributes the public records it finds to a shared creator and agency pool that all users of this actor read from, so a later run reads what this one found; `contribute_to_shared_pool` is on by default and turning it off leaves the run reading the pool and writing nothing. Only public data already in the returned rows is contributed, nothing from your Apify account or your input, and a contribution is not charged. Requires an APIFY_TOKEN and consumes Apify credits. Read only.",
     annotations: {
       title: "Recheck an Influencer Watchlist for Changes",
       readOnlyHint: true,
@@ -220,6 +220,11 @@ server.registerTool(
     batch_size: z.number().int().optional().describe("Rows fetched at once. Leave empty for the measured per platform default; the measurement is in the README. Higher is faster and, above the measured point, loses rows."),
     twitch_client_id: z.string().optional().describe("Optional. Your own registered Twitch application client id. With `twitch_app_token` the Twitch reads use the official Helix API instead of the public web endpoint. Never a Mamba Labs credential."),
     twitch_app_token: z.string().optional().describe("Optional. An app access token for your Twitch client id (client credentials flow). Used only for Twitch reads, never stored or logged."),
+    // Shared pool toggle (wo-influencer-newsletter-agency-pool-exchange-2026-09-22, Track 4).
+    // The actor input field is Track 3's; this mirror exists so an MCP caller can turn the
+    // contribution off. Do not publish this wrapper before the actor build that carries the
+    // field is live, or the actor is sent an input property its schema does not have.
+    contribute_to_shared_pool: z.boolean().optional().describe("On by default. Contributes the public records this run finds to a shared creator and agency pool that all users of this actor read from, so a later run reads what this one found. Only public data already in the returned rows is sent, never your Apify account, your input list, or your API keys, and a contribution is not charged. Set false to read the pool and write nothing. Default: true."),
     },
   },
   async (args) =>
