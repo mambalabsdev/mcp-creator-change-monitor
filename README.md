@@ -51,11 +51,12 @@ Nothing is required. Influencer Change Monitor answers a run with no usable inpu
 
 ## Pricing
 
-Influencer Change Monitor is pay per event on Apify. Every price below is flat across the FREE, BRONZE, SILVER, and GOLD tiers.
+Influencer Change Monitor is pay per event on Apify. Every price below is flat across every tier: FREE, BRONZE, SILVER, GOLD, PLATINUM, and DIAMOND.
 
 | Event | Charged for | Price | Fires when |
 | --- | --- | ---: | --- |
 | `actor-start` | Actor start | $0.002 | Once per run, on start. Covers the run overhead. |
+| `apify-actor-start` | Apify actor start | not charged | Apify's synthetic start event. This actor prices its own `actor-start` event instead, so `apify-actor-start` is not charged on top of it. |
 | `creator-rechecked` | Creator rechecked | $0.008 | Once per creator whose profile (and, when check_links is on, link page) was read on a monitor run, whether or not anything changed. This is the base price per creator; a change row is charged on top of it. |
 | `change-detected` | Change detected | $0.01 | Once per change row returned by the monitor, on top of the recheck. A first_seen baseline row is a change row. Unchanged creators return no row. |
 | `instagram-bio-fetch` | Instagram bio fetch | $0.01 | Once per Instagram profile row when the bio, bio link, and following were not on the embed widget or the datacenter API and the profile page was read over the residential proxy and came back readable. Only when escalate_on_block is on. Never on the embed or datacenter reads, never on another platform, never on a blocked page, and never on an error row. |
@@ -91,5 +92,6 @@ Actor ID `d2VVgahNL6UmcLkhg`. The wrapper calls the actor by that immutable ID r
 | [Link in Bio Scraper and Newsletter Detector](https://apify.com/mambalabs/link-in-bio-newsletter-checker) | `OorucdheTIgu7RFzK` | [`@mambalabsdev/mcp-link-in-bio-newsletter-checker`](https://www.npmjs.com/package/@mambalabsdev/mcp-link-in-bio-newsletter-checker) |
 | [Influencer Change Monitor](https://apify.com/mambalabs/creator-change-monitor) | `d2VVgahNL6UmcLkhg` | [`@mambalabsdev/mcp-creator-change-monitor`](https://www.npmjs.com/package/@mambalabsdev/mcp-creator-change-monitor) |
 | [Influencer Lead List Builder](https://apify.com/mambalabs/creator-lead-list-all-in-one) | `KnmByszcv135yM30G` | [`@mambalabsdev/mcp-creator-lead-list-all-in-one`](https://www.npmjs.com/package/@mambalabsdev/mcp-creator-lead-list-all-in-one) |
+| [Influencer Talent Agency Lookup](https://apify.com/mambalabs/talent-agency-lookup) | `zCuX4Mgyg6JvXgGzd` | [`@mambalabsdev/mcp-talent-agency-lookup`](https://www.npmjs.com/package/@mambalabsdev/mcp-talent-agency-lookup) |
 
 Built by [Mamba Labs](https://mambabuilt.com).
