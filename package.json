@@ -1,7 +1,7 @@
 {
   "name": "@mambalabsdev/mcp-creator-change-monitor",
   "displayName": "Influencer Change Monitor",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "MCP server for the Mamba Labs Influencer Change Monitor actor on Apify. A named list of creator handles in, one row per change since the previous run out.",
   "type": "module",
   "bin": {
