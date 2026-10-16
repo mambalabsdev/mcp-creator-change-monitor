@@ -1,7 +1,7 @@
 {
   "name": "mcp-creator-change-monitor",
   "displayName": "Influencer Change Monitor",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "Recheck a named influencer watchlist and return what moved since the run before it.",
   "author": {
     "name": "Mamba Labs",
